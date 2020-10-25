@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "gogrep_lib",
+    srcs = ["gogrep.go"],
+    importpath = "honnef.co/go/tools/internal/cmd/gogrep",
+    visibility = ["//visibility:private"],
+    deps = ["@co_honnef_go_tools//pattern:go_default_library"],
+)
+
+go_binary(
+    name = "gogrep",
+    embed = [":gogrep_lib"],
+    visibility = ["//:__subpackages__"],
+)

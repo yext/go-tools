@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "printf",
+    srcs = ["printf.go"],
+    importpath = "honnef.co/go/tools/printf",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "printf_test",
+    srcs = ["printf_test.go"],
+    embed = [":printf"],
+)

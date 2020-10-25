@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "lintcmd",
+    srcs = [
+        "cmd.go",
+        "directives.go",
+        "format.go",
+        "stats.go",
+        "stats_bsd.go",
+        "stats_posix.go",
+    ],
+    importpath = "honnef.co/go/tools/lintcmd",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@co_honnef_go_tools//config:go_default_library",
+        "@co_honnef_go_tools//internal/cache:go_default_library",
+        "@co_honnef_go_tools//unused:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/buildutil",
+        "@org_golang_x_tools//go/packages",
+    ],
+)
+
+go_test(
+    name = "lintcmd_test",
+    srcs = [
+        "cmd_test.go",
+        "lint_test.go",
+    ],
+    embed = [":lintcmd"],
+    deps = [
+        "@co_honnef_go_tools//config:go_default_library",
+        "@org_golang_x_tools//go/packages",
+    ],
+)

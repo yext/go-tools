@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "cache",
+    srcs = [
+        "cache.go",
+        "default.go",
+        "hash.go",
+    ],
+    importpath = "honnef.co/go/tools/internal/cache",
+    visibility = ["//:__subpackages__"],
+    deps = ["@co_honnef_go_tools//internal/renameio:go_default_library"],
+)
+
+go_test(
+    name = "cache_test",
+    srcs = [
+        "cache_test.go",
+        "hash_test.go",
+    ],
+    embed = [":cache"],
+)

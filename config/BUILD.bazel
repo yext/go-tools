@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "config",
+    srcs = ["config.go"],
+    importpath = "honnef.co/go/tools/config",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_burntsushi_toml//:toml",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+    ],
+)

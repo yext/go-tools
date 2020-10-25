@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "structlayout-optimize_lib",
+    srcs = ["main.go"],
+    importpath = "honnef.co/go/tools/cmd/structlayout-optimize",
+    visibility = ["//visibility:private"],
+    deps = ["@co_honnef_go_tools//structlayout:go_default_library"],
+)
+
+go_binary(
+    name = "structlayout-optimize",
+    embed = [":structlayout-optimize_lib"],
+    visibility = ["//visibility:public"],
+)

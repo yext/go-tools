@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "runner",
+    srcs = [
+        "runner.go",
+        "stats.go",
+    ],
+    importpath = "honnef.co/go/tools/lintcmd/runner",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@co_honnef_go_tools//config:go_default_library",
+        "@co_honnef_go_tools//internal/cache:go_default_library",
+        "@co_honnef_go_tools//unused:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/packages",
+        "@org_golang_x_tools//go/types/objectpath:go_tool_library",
+    ],
+)

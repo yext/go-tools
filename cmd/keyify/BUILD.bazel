@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "keyify_lib",
+    srcs = [
+        "keyify.go",
+        "position.go",
+    ],
+    importpath = "honnef.co/go/tools/cmd/keyify",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
+        "@org_golang_x_tools//go/buildutil",
+        "@org_golang_x_tools//go/loader",
+    ],
+)
+
+go_binary(
+    name = "keyify",
+    embed = [":keyify_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,61 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "cha",
+    srcs = ["cha.go"],
+    importpath = "honnef.co/go/tools/go/callgraph/cha",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_tools//go/types/typeutil:go_tool_library"],
+)
+
+go_test(
+    name = "cha_test",
+    srcs = ["cha_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":cha"],
+    deps = select({
+        "@io_bazel_rules_go//go/platform:aix": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:darwin": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:dragonfly": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:freebsd": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:illumos": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:ios": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:js": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:linux": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:nacl": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:netbsd": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:openbsd": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:plan9": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:solaris": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "@io_bazel_rules_go//go/platform:windows": [
+            "@org_golang_x_tools//go/loader",
+        ],
+        "//conditions:default": [],
+    }),
+)

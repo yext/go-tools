@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "staticcheck",
+    srcs = [
+        "analysis.go",
+        "buildtag.go",
+        "doc.go",
+        "lint.go",
+        "rules.go",
+        "structtag.go",
+    ],
+    importpath = "honnef.co/go/tools/staticcheck",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@co_honnef_go_tools//go/types/typeutil:go_default_library",
+        "@co_honnef_go_tools//internal/passes/buildir:go_default_library",
+        "@co_honnef_go_tools//internal/sharedcheck:go_default_library",
+        "@co_honnef_go_tools//pattern:go_default_library",
+        "@co_honnef_go_tools//printf:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/analysis/passes/inspect:go_tool_library",
+        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
+        "@org_golang_x_tools//go/ast/inspector:go_tool_library",
+        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
+    ],
+)
+
+go_test(
+    name = "staticcheck_test",
+    srcs = ["lint_test.go"],
+    embed = [":staticcheck"],
+    deps = ["@co_honnef_go_tools//lint/testutil:go_default_library"],
+)

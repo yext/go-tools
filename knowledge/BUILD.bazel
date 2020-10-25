@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "knowledge",
+    srcs = [
+        "arg.go",
+        "deprecated.go",
+    ],
+    importpath = "honnef.co/go/tools/knowledge",
+    visibility = ["//visibility:public"],
+)

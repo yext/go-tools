@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "rdeps_lib",
+    srcs = ["rdeps.go"],
+    importpath = "honnef.co/go/tools/cmd/rdeps",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_kisielk_gotool//:gotool",
+        "@org_golang_x_tools//go/buildutil",
+        "@org_golang_x_tools//refactor/importgraph",
+    ],
+)
+
+go_binary(
+    name = "rdeps",
+    embed = [":rdeps_lib"],
+    visibility = ["//visibility:public"],
+)

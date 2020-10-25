@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "ast-to-pattern_lib",
+    srcs = [
+        "main.go",
+        "parse.go",
+    ],
+    importpath = "honnef.co/go/tools/internal/cmd/ast-to-pattern",
+    visibility = ["//visibility:private"],
+    deps = ["@co_honnef_go_tools//pattern:go_default_library"],
+)
+
+go_binary(
+    name = "ast-to-pattern",
+    embed = [":ast-to-pattern_lib"],
+    visibility = ["//:__subpackages__"],
+)

@@ -1,0 +1,63 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "renameio",
+    srcs = ["renameio.go"],
+    importpath = "honnef.co/go/tools/internal/renameio",
+    visibility = ["//:__subpackages__"],
+    deps = ["@co_honnef_go_tools//internal/robustio:go_default_library"],
+)
+
+go_test(
+    name = "renameio_test",
+    srcs = [
+        "renameio_test.go",
+        "umask_test.go",
+    ],
+    embed = [":renameio"],
+    deps = select({
+        "@io_bazel_rules_go//go/platform:aix": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:android": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:darwin": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:dragonfly": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:freebsd": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:illumos": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:ios": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:js": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:linux": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:nacl": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:netbsd": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:openbsd": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:solaris": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "@io_bazel_rules_go//go/platform:windows": [
+            "@co_honnef_go_tools//internal/robustio:go_default_library",
+        ],
+        "//conditions:default": [],
+    }),
+)

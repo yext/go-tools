@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "callgraph",
+    srcs = [
+        "callgraph.go",
+        "util.go",
+    ],
+    importpath = "honnef.co/go/tools/go/callgraph",
+    visibility = ["//visibility:public"],
+)

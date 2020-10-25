@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "robustio",
+    srcs = [
+        "robustio.go",
+        "robustio_darwin.go",
+        "robustio_flaky.go",
+        "robustio_other.go",
+        "robustio_windows.go",
+    ],
+    importpath = "honnef.co/go/tools/internal/robustio",
+    visibility = ["//:__subpackages__"],
+)

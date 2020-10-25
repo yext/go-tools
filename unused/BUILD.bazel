@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "unused",
+    srcs = [
+        "edge.go",
+        "edgekind_string.go",
+        "implements.go",
+        "unused.go",
+    ],
+    importpath = "honnef.co/go/tools/unused",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@co_honnef_go_tools//go/types/typeutil:go_default_library",
+        "@co_honnef_go_tools//internal/passes/buildir:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+    ],
+)
+
+go_test(
+    name = "unused_test",
+    srcs = ["unused_test.go"],
+    embed = [":unused"],
+    deps = ["@org_golang_x_tools//go/analysis/analysistest"],
+)

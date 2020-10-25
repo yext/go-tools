@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "staticcheck_lib",
+    srcs = ["staticcheck.go"],
+    importpath = "honnef.co/go/tools/cmd/staticcheck",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@co_honnef_go_tools//simple:go_default_library",
+        "@co_honnef_go_tools//staticcheck:go_default_library",
+        "@co_honnef_go_tools//stylecheck:go_default_library",
+        "@co_honnef_go_tools//unused:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+    ],
+)
+
+go_binary(
+    name = "staticcheck",
+    embed = [":staticcheck_lib"],
+    visibility = ["//visibility:public"],
+)

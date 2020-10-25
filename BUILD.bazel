@@ -1,1 +1,17 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix honnef.co/go/tools
 # gazelle:map_kind go_library go_tool_library @io_bazel_rules_go//go:def.bzl
+gazelle(name = "gazelle")
+
+
+# gazelle:exclude analysis/facts/nilness/testdata
+# gazelle:exclude analysis/facts/testdata
+# gazelle:exclude analysis/facts/typedness/testdata
+# gazelle:exclude internal/go/gcimporter/testdata
+# gazelle:exclude internal/passes/buildir/testdata
+# gazelle:exclude lintcmd/testdata
+# gazelle:exclude simple/testdata
+# gazelle:exclude staticcheck/testdata
+# gazelle:exclude stylecheck/testdata
+# gazelle:exclude unused/testdata

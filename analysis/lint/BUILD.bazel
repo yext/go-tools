@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "lint",
+    srcs = ["lint.go"],
+    importpath = "honnef.co/go/tools/analysis/lint",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_tools//go/analysis:go_tool_library"],
+)

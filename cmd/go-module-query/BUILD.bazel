@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "go-module-query_lib",
+    srcs = ["main.go"],
+    importpath = "honnef.co/go/tools/cmd/go-module-query",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_google_renameio//:renameio",
+        "@com_github_rogpeppe_go_internal//modfile",
+        "@org_golang_x_mod//module",
+    ],
+)
+
+go_binary(
+    name = "go-module-query",
+    embed = [":go-module-query_lib"],
+    visibility = ["//visibility:public"],
+)

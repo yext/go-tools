@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "pattern",
+    srcs = [
+        "convert.go",
+        "doc.go",
+        "lexer.go",
+        "match.go",
+        "parser.go",
+        "pattern.go",
+    ],
+    importpath = "honnef.co/go/tools/pattern",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "pattern_test",
+    srcs = ["parser_test.go"],
+    embed = [":pattern"],
+)

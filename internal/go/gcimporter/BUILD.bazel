@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "gcimporter",
+    srcs = [
+        "exportdata.go",
+        "gcimporter.go",
+        "iimport.go",
+        "newInterface10.go",
+        "newInterface11.go",
+    ],
+    importpath = "honnef.co/go/tools/internal/go/gcimporter",
+    visibility = ["//:__subpackages__"],
+)
+
+go_test(
+    name = "gcimporter_test",
+    srcs = [
+        "gcimporter11_test.go",
+        "gcimporter_test.go",
+    ],
+    embed = [":gcimporter"],
+)

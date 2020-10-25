@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "astutil",
+    srcs = ["util.go"],
+    importpath = "honnef.co/go/tools/go/ast/astutil",
+    visibility = ["//visibility:public"],
+)

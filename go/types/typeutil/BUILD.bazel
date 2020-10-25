@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "typeutil",
+    srcs = [
+        "callee.go",
+        "imports.go",
+        "methodsetcache.go",
+        "ui.go",
+        "util.go",
+    ],
+    importpath = "honnef.co/go/tools/go/types/typeutil",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_tools//go/ast/astutil:go_tool_library"],
+)
+
+go_test(
+    name = "typeutil_test",
+    srcs = [
+        "callee_test.go",
+        "imports_test.go",
+        "ui_test.go",
+    ],
+    embed = [":typeutil"],
+    deps = ["@co_honnef_go_tools//go/types/typeutil:go_default_library"],
+)

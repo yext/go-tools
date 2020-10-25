@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "structlayout",
+    srcs = ["layout.go"],
+    importpath = "honnef.co/go/tools/structlayout",
+    visibility = ["//visibility:public"],
+)

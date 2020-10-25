@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "version",
+    srcs = [
+        "buildinfo.go",
+        "buildinfo111.go",
+        "version.go",
+    ],
+    importpath = "honnef.co/go/tools/lintcmd/version",
+    visibility = ["//visibility:public"],
+)

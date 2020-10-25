@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "report",
+    srcs = ["report.go"],
+    importpath = "honnef.co/go/tools/analysis/report",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
+    ],
+)
+
+go_test(
+    name = "report_test",
+    srcs = ["report_test.go"],
+    embed = [":report"],
+)

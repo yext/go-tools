@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "testenv",
+    srcs = [
+        "testenv.go",
+        "testenv_112.go",
+    ],
+    importpath = "honnef.co/go/tools/internal/testenv",
+    visibility = ["//:__subpackages__"],
+)

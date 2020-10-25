@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "loader",
+    srcs = [
+        "buildid.go",
+        "hash.go",
+        "loader.go",
+        "note.go",
+    ],
+    importpath = "honnef.co/go/tools/go/loader",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@co_honnef_go_tools//config:go_default_library",
+        "@co_honnef_go_tools//internal/cache:go_default_library",
+        "@org_golang_x_tools//go/packages",
+    ],
+)

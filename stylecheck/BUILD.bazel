@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test", "go_tool_library")
+
+go_tool_library(
+    name = "stylecheck",
+    srcs = [
+        "analysis.go",
+        "doc.go",
+        "lint.go",
+        "names.go",
+    ],
+    importpath = "honnef.co/go/tools/stylecheck",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@co_honnef_go_tools//config:go_default_library",
+        "@co_honnef_go_tools//go/types/typeutil:go_default_library",
+        "@co_honnef_go_tools//internal/passes/buildir:go_default_library",
+        "@co_honnef_go_tools//pattern:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/analysis/passes/inspect:go_tool_library",
+        "@org_golang_x_tools//go/ast/inspector:go_tool_library",
+        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
+    ],
+)
+
+go_test(
+    name = "stylecheck_test",
+    srcs = ["lint_test.go"],
+    embed = [":stylecheck"],
+    deps = ["@co_honnef_go_tools//lint/testutil:go_default_library"],
+)

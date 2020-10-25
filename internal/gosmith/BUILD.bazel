@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_tool_library")
+
+go_tool_library(
+    name = "gosmith_lib",
+    srcs = [
+        "context.go",
+        "expr.go",
+        "gosmith.go",
+        "stmt.go",
+        "type.go",
+    ],
+    importpath = "honnef.co/go/tools/internal/gosmith",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "gosmith",
+    embed = [":gosmith_lib"],
+    visibility = ["//:__subpackages__"],
+)
